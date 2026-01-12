@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideHttpClient(),
-    provideAnimationsAsync(),
+    // provideAnimationsAsync(),
     providePrimeNG({
             theme: {
                 preset: MyPreset,
