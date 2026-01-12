@@ -14,10 +14,11 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { EmployeeService } from '../employees/employee.service';
 import { CustomDate } from '../../share/custom-date.interface';
+import { CustomCurrencyPipe } from "../../share/custom-currency.pipe";
 
 @Component({
   selector: 'banque-page',
-  imports: [ReactiveFormsModule, FormsModule,TableModule, IconField, InputIcon, Button, CommonModule, ToastModule, ConfirmDialog, Dialog, InputText],
+  imports: [ReactiveFormsModule, FormsModule, TableModule, IconField, InputIcon, Button, CommonModule, ToastModule, ConfirmDialog, Dialog, InputText, CustomCurrencyPipe],
   templateUrl: './banque.page.html',
   styleUrl: './banque.page.css',
   providers:[ConfirmationService, MessageService]
