@@ -1,0 +1,273 @@
+@let employees = (employees$ | async) || [];
+@let banques1 = (banques$ | async) || [];
+@let typeConges1 = (typeConges$ | async) || [];
+@let etatCivils1 = (etatCivils$ | async) || [];
+@let departements1 = (departements$ | async) || [];
+@let positions1 = (positions$ | async) || [];
+
+{{
+    fullSelectsFromServices(banques1, departements1, etatCivils1, positions1, typeConges1)
+}}
+
+<div class="w-full h-full" >
+    <div class="p-5 flex justify-between  border-b border-gray-100">
+        <h2 class="text-2xl font-bold text-gray-700">Gestion Des Employés</h2>
+        <span>{{today() | date}}</span>
+    </div>
+
+    
+
+    <div class=" h-[calc(100%-72px)]">
+
+        <p-table 
+            #dt2 
+            [value]="employees" 
+            [paginator]="true"
+            [rows]="5"
+            [rowsPerPageOptions]="[5,10,20]" 
+            [paginator]="true"
+            [globalFilterFields]="['nom', 'prenom', 'salaire', 'departement', 'position', 'typeConge', 'telephone', 'nif', 'idEmployee','sexe']"
+            [tableStyle]="{ 'min-width': '10rem' }">
+            <ng-template #caption>
+                <div class="flex">
+                    <div class="flex gap-1">
+                        <p-button (click)="onAdd()" icon="pi pi-plus" label="Ajouter" />
+                        <p-button (click)="refresh()" label="Actualiser" icon="pi pi-refresh" variant="outlined" severity="secondary"/>
+
+                    </div>
+                    <p-iconfield iconemployee="left" class="ml-auto">
+                        <p-inputicon>
+                            <i class="pi pi-search"></i>
+                        </p-inputicon>
+                        <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+                    </p-iconfield>
+                </div>
+            </ng-template>
+            <ng-template #header>
+                <tr>
+                    <th><div class="white-space-nowrap">ID</div></th>
+                    <th pSortableColumn="nom">
+                        Nom <p-sortIcon field="nom"/>
+                    </th>
+                    <th pSortableColumn="prenom">
+                        Prenom <p-sortIcon field="prenom"/>
+                    </th>
+                    <th>Sexe</th>
+                    <th>Nif</th>
+                    <th>Telephone</th>
+                    <th>Position</th>
+                    <th>Département</th>
+                    <th pSortableColumn="salaire">
+                        Salaire <p-sortIcon field="salaire"/>
+                    </th>
+                    <th>Conge</th>
+                    <th>Actions</th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-employee>
+                <tr>
+                    <td>{{ employee.idEmployee }}</td>
+                    <td>{{ employee.nom }}</td>
+                    <td>{{ employee.prenom }}</td>
+                    <td>{{ employee.sexe }}</td>
+                    <td>{{ employee.nif }}</td>
+                    <td>{{ employee.telephone }}</td>
+                    <td>{{ employee.position.name }}</td>
+                    <td>{{ employee.departement.name }}</td>
+                    <td>{{ employee.salaire }}</td>
+                    <td>{{ employee.typeConge.name }}</td>
+                    <td>
+                        <div class="flex gap-2">
+                            <button pButton [outlined]="true" class="mx-auto" (click)="onUpdate(employee)"  icon="pi pi-sync" >
+                            
+                            <!-- <span pButtonLabel></span> -->
+                        </button>
+                        <button pButton [outlined]="true" class="mx-auto" (click)="showDialog('view','Fiche De l\'Employé','Liste complète des informations concernant cet employé',employee)"  icon="pi pi-eye" >
+                            
+                            <!-- <span pButtonLabel>Afficher</span> -->
+                        </button>
+                         <button pButton [outlined]="true"  class="mx-auto" severity="danger" (click)="onDelete($event, employee)"  icon="pi pi-trash" >
+                            
+                            <!-- <span pButtonLabel>Afficher</span> -->
+                        </button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '30rem' }">
+    <ng-template #header>
+        <div class="flex flex-col items-start justify-center ">
+            <span class="text-lg font-semibold">{{headerDialogTitle}}</span> 
+            <small>{{headerDialogSubtitle}}</small>
+        </div>
+    </ng-template>
+    @if(currentOperation === "view"){
+        <div class="flex flex-col gap-2 text-gray-500">
+            <div class="grid grid-cols-2 gap-1 ">
+                <span class="font-bold">ID:</span>
+                <span>{{employee.idEmployee}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span  class="font-bold">Nom:</span>
+                <span>{{employee.nom}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span class="font-bold" >Prenom:</span>
+                <span>{{employee.prenom}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span class="font-bold">Date de Naissance:</span>
+                <span>{{employee.dateNaissance | date}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span class="font-bold">Sexe:</span>
+                <span>{{employee.sexe}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span  class="font-bold">Nif:</span>
+                <span>{{employee.nif}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span class="font-bold">Adresse:</span>
+                <span>{{employee.adresse}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span class="font-bold" >Telephone:</span>
+                <span>{{'+509'+employee.telephone}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span  class="font-bold">Etat Civil:</span>
+                <span>{{employee.etatCivil.name}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span  class="font-bold">Date D'embauche:</span>
+                <span>{{employee.dateEmbauche | date}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span  class="font-bold">Position:</span>
+                <span>{{employee.position.name}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span class="font-bold" >Departement:</span>
+                <span>{{employee.departement.name}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span  class="font-bold">Nombre D'Enfant:</span>
+                <span>{{employee.nombreEnfant === 0?'Aucun':employee.nombreEnfant}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span class="font-bold">Salaire:</span>
+                <span>{{employee.salaire | customCurrency}}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span class="font-bold">Banque:</span>
+                <span>{{employee.banque.name }}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 ">
+                <span class="font-bold">Numero Du Compte:</span>
+                <span>{{employee.numCompteBancaire }}</span>
+            </div>
+        </div>
+    }@else{
+        <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-1">
+                    <label for="idEmployee" class="font-semibold ">ID</label>
+                    <input pInputText id="idEmployee" [(ngModel)]="employee.idEmployee" [fluid]="true" class="flex-auto" placeholder="Entrer l'ID" autocomplete="off" />
+                </div>
+                <div class="flex gap-1">
+                    <div class="flex flex-col gap-1">
+                        <label for="nom" class="font-semibold ">Nom</label>
+                        <input pInputText id="nom" [(ngModel)]="employee.nom" class="flex-auto" placeholder="Entrer le nom" [fluid]="true" autocomplete="off" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="prenom" class="font-semibold ">Prenom</label>
+                        <input pInputText id="prenom" [(ngModel)]="employee.prenom" [fluid]="true" placeholder="Entrer le prenom" class="flex-auto" autocomplete="off" />
+                    </div>
+                </div>
+                
+                <div class="flex flex-col gap-1">
+                        <label for="sexe" class="font-semibold ">Sexe</label>
+                        <p-select [options]="sexes" [fluid]="true" [(ngModel)]="selectedSexe" optionLabel="name" placeholder="Selectionner le sexe" class="w-full md:w-56" />
+                </div>
+                <div class="flex flex-col gap-1">
+                        <label for="telephone" class="font-semibold ">Telephone</label>
+                        <input pInputText type="number" id="telephone" [(ngModel)]="employee.telephone" [fluid]="true" class="flex-auto" placeholder="Entrer le lelephone" autocomplete="off" />
+                </div>
+                <div class="flex flex-col gap-1">
+                        <label for="dateNaissance" class="font-semibold ">Date De Naissance</label>
+                        <p-datepicker id="dateNaissance" [fluid]="true" [(ngModel)]="employee.dateNaissance" />
+                </div>
+                <div class="flex flex-col gap-1">
+                        <label for="adresse" class="font-semibold ">Adresse</label>
+                        <input pInputText id="adresse" [fluid]="true" [(ngModel)]="employee.adresse" class="flex-auto" placeholder="Entrer l'adresse" autocomplete="off" />
+                </div>
+                <div class="flex flex-col gap-1">
+                        <label for="nif" class="font-semibold ">NIF</label>
+                        <input pInputText type="number" id="nif" [fluid]="true" [(ngModel)]="employee.nif" class="flex-auto" placeholder="Entrer le NIF" autocomplete="off" />
+                </div>
+                <div class="flex flex-col gap-1">
+                        <label for="nif" class="font-semibold ">Departement</label>
+                        <p-select [options]="departements" [fluid]="true" [(ngModel)]="selectedDepartement" optionLabel="name" placeholder="Selectionner un departement" class="w-full md:w-56" />
+                </div>
+                <div class="flex flex-col gap-1">
+                        <label for="nif" class="font-semibold ">Position</label>
+                        <p-select [options]="positions" [fluid]="true" [(ngModel)]="selectedPosition" optionLabel="name" placeholder="Selectionner une position" class="w-full md:w-56" />
+                </div>
+                <div class="flex flex-col gap-1">
+                        <label for="etatCivil" class="font-semibold ">Etat Civil</label>
+                        <p-select id="etatCivil" [fluid]="true" [options]="etatCivils" [(ngModel)]="selectedEtatCivil" optionLabel="name" placeholder="Selectionner un etat civil" class="w-full md:w-56" />
+                </div>
+                
+                <div class="flex flex-col gap-1">
+                        <label for="dateEmbauche" class="font-semibold ">Date D'Embauche</label>
+                        <p-datepicker id="dateEmbauche" [fluid]="true" [(ngModel)]="employee.dateEmbauche" />
+                </div>
+                
+                <div class="flex flex-col gap-1">
+                        <label for="nbEnfant" class="font-semibold ">Nombre d'Enfant</label>
+                        <input pInputText type="number" id="nbEnfant" [(ngModel)]="employee.nombreEnfant" [fluid]="true" class="flex-auto" placeholder="Entrer le nombre d'enfant" autocomplete="off" />
+                </div>
+                <div class="flex flex-col gap-1">
+                        <label for="salaire" class="font-semibold ">Salaire (HTG)</label>
+                        <input type="number" pInputText id="salaire" [fluid]="true" [(ngModel)]="employee.salaire" class="flex-auto" placeholder="Entrer le salaire" autocomplete="off" />
+                </div>
+                <div class="flex flex-col gap-1">
+                        <label for="conge" class="font-semibold ">Type de Congé</label>
+                        <p-select id="conge" [options]="typeConges" [fluid]="true" [(ngModel)]="selectedTypeConge" optionLabel="name" placeholder="Selectionner un Type de Conge" class="w-full md:w-56" />
+                </div>
+                <div class="flex flex-col gap-1">
+                        <label for="nif" class="font-semibold ">Banque</label>
+                        <p-select  [options]="banques" [fluid]="true" [(ngModel)]="selectedBanque" optionLabel="name" placeholder="Selectionner une Banque" class="w-full md:w-56" />
+                </div>
+                <div class="flex flex-col gap-1">
+                        <label for="numeroCompte" class="font-semibold ">Numero Compte</label>
+                        <input pInputText type="number" id="numeroCompte" [(ngModel)]="employee.numCompteBancaire" placeholder="Entrer le numero de compte" [fluid]="true" class="flex-auto" autocomplete="off" />
+                </div>
+
+                
+
+        </div>
+    }
+    
+    
+    <ng-template #footer>
+        @if(currentOperation === "view"){
+            <p-button label="Fermer" severity="primary" (click)="visible = false" />
+        }@else {
+            <p-button label="Annuler" [outlined]="true" severity="secondary" (click)="visible = false" />
+            <p-button label="Valider"  severity="primary" (click)="onValidate()" />
+        }
+        
+    </ng-template>
+</p-dialog>
+
+
+
+
+
+<p-toast />
+<p-confirmdialog />
