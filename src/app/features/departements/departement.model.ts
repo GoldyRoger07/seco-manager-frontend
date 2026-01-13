@@ -1,6 +1,9 @@
+import { Employee } from "../employees/employee.model";
+
 export class Departement{
     constructor(
-        public _id = "",
-        public name = ""
+        public id = 0,
+        public name = "",
+        public employees: Employee[] = []
     ){}
 }

@@ -163,17 +163,17 @@ export class EmployeePage extends CustomDate implements OnInit{
         
         this.selectedDepartement = {
           name: this.capitalizeFirstLetter(this.employee.departement.name),
-          code: this.employee.departement._id
+          code: this.employee.departement.id
         }
 
         this.selectedPosition = {
           name: this.capitalizeFirstLetter(this.employee.position.name),
-          code: this.employee.position._id
+          code: this.employee.position.id
         }
 
         this.selectedEtatCivil = {
           name: this.capitalizeFirstLetter(this.employee.etatCivil.name),
-          code: this.employee.etatCivil._id
+          code: this.employee.etatCivil.id
         }
 
         this.selectedSexe = {
@@ -183,12 +183,12 @@ export class EmployeePage extends CustomDate implements OnInit{
 
         this.selectedBanque = {
           name: this.capitalizeFirstLetter(this.employee.banque.name),
-          code: this.employee.banque._id
+          code: this.employee.banque.id
         }
 
         this.selectedTypeConge = {
           name: this.capitalizeFirstLetter(this.employee.typeConge.name),
-          code: this.employee.typeConge._id
+          code: this.employee.typeConge.id
         }
     }
   
@@ -223,7 +223,7 @@ export class EmployeePage extends CustomDate implements OnInit{
     onDelete(event: Event, employee: Employee) {
             this.confirmationService.confirm({
                 target: event.target as EventTarget,
-                message: 'Etes vous sure de vouloir supprimer cette employee ?',
+                message: 'Etes vous sure de vouloir supprimer cet employe ?',
                 header: 'Confirmation',
                 closable: true,
                 closeOnEscape: true,
@@ -238,8 +238,8 @@ export class EmployeePage extends CustomDate implements OnInit{
                     severity: 'danger'
                 },
                 accept: () => {
-                    // this.employeeService.delete(emp.id as number).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Employé supprimé avec succes' }))
-                   this.employeeService.delete(employee._id ).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Banque supprimée avec succes' })) 
+                    this.employeeService.delete(employee.id ).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Employé supprimé avec succes' }))
+                  //  this.employeeService.delete(employee.id ).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Banque supprimée avec succes' })) 
                 },
                 reject: () => {
                     // this.messageService.add({
@@ -255,37 +255,37 @@ export class EmployeePage extends CustomDate implements OnInit{
     fullSelectsFromServices(banques: Banque[], departements: Departement[], etatCivils: EtatCivil[], positions: Position[], typeConges: TypeConge[]){
     this.banques = banques.map(banque => ({
       name: this.capitalizeFirstLetter(banque.name as string),
-      code: banque._id
+      code: banque.id
     }))
 
     this.etatCivils = etatCivils.map(etatCivil => ({
       name: this.capitalizeFirstLetter(etatCivil.name),
-      code: etatCivil._id
+      code: etatCivil.id
     }))
 
     this.departements = departements.map(departements => ({
       name: this.capitalizeFirstLetter(departements.name),
-      code: departements._id
+      code: departements.id
     }))
 
     this.positions = positions.map(position => ({
       name: this.capitalizeFirstLetter(position.name),
-      code: position._id
+      code: position.id
     }))
 
     this.typeConges = typeConges.map(typeConge => ({
       name: this.capitalizeFirstLetter(typeConge.name),
-      code: typeConge._id
+      code: typeConge.id
     }))
   }
 
   getInfoFromSelects(){
-    this.employee.departement._id = this.selectedDepartement.code 
-    this.employee.etatCivil._id =  this.selectedEtatCivil.code 
-    this.employee.position._id = this.selectedPosition.code ;
+    this.employee.departement.id = this.selectedDepartement.code 
+    this.employee.etatCivil.id =  this.selectedEtatCivil.code 
+    this.employee.position.id = this.selectedPosition.code ;
     this.employee.sexe = this.selectedSexe ? this.selectedSexe.code as 'MASCULIN' | 'FEMININ' : 'MASCULIN';
-    this.employee.banque._id = this.selectedBanque.code ;
-    this.employee.typeConge._id = this.selectedTypeConge.code
+    this.employee.banque.id = this.selectedBanque.code ;
+    this.employee.typeConge.id = this.selectedTypeConge.code
 
     // console.log(this.selectedDepartement.code )
 

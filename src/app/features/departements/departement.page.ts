@@ -86,6 +86,41 @@ export class DepartementPage extends CustomDate implements OnInit {
       }
     }
 
+    onDelete(event: Event, departement: Departement) {
+                this.confirmationService.confirm({
+                    target: event.target as EventTarget,
+                    message: 'Etes vous sure de vouloir supprimer ce departement ?',
+                    header: 'Confirmation',
+                    closable: true,
+                    closeOnEscape: true,
+                    icon: 'pi pi-exclamation-triangle',
+                    rejectButtonProps: {
+                        label: 'Cancel',
+                        severity: 'secondary',
+                        outlined: true,
+                    },
+                    acceptButtonProps: {
+                        label: 'Delete',
+                        severity: 'danger'
+                    },
+                    accept: () => {
+                        // this.employeeService.delete(emp.id as number).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Employé supprimé avec succes' }))
+                       this.departementService.delete(departement.id ).subscribe(() => {
+                          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Departement supprimé avec succes'})
+                           this.refresh()
+                      }) 
+                    },
+                    reject: () => {
+                        // this.messageService.add({
+                        //     severity: 'error',
+                        //     summary: 'Rejected',
+                        //     detail: 'You have rejected',
+                        //     life: 3000,
+                        // });
+                    },
+                });
+        }
+
     ngOnInit(): void {
       this.refresh()
     }

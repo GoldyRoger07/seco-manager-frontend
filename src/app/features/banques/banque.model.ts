@@ -1,6 +1,6 @@
 export class Banque{
     constructor(
-        public _id = "",
+        public id = 0,
         public name = ""
     ){}
 }

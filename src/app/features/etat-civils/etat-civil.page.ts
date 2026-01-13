@@ -103,7 +103,7 @@ export class EtatCivilPage extends CustomDate implements OnInit{
                   },
                   accept: () => {
                       // this.employeeService.delete(emp.id as number).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Employé supprimé avec succes' }))
-                     this.etatCivilService.delete(etatCivil._id ).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Banque supprimée avec succes' })) 
+                     this.etatCivilService.delete(etatCivil.id ).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Etat Civil supprimé avec succes' })) 
                   },
                   reject: () => {
                       // this.messageService.add({

@@ -6,7 +6,7 @@ import { TypeConge } from "../type-conge/type-conge.model";
 
 export class Employee{
     constructor(
-        public _id = "",
+        public id = 0,
         public idEmployee = "",
         public nom = "",
         public prenom = "",

@@ -18,7 +18,7 @@ import { CustomCurrencyPipe } from "../../share/custom-currency.pipe";
 
 @Component({
   selector: 'banque-page',
-  imports: [ReactiveFormsModule, FormsModule, TableModule, IconField, InputIcon, Button, CommonModule, ToastModule, ConfirmDialog, Dialog, InputText, CustomCurrencyPipe],
+  imports: [ReactiveFormsModule, FormsModule, TableModule, IconField, InputIcon, Button, CommonModule, ToastModule, ConfirmDialog, Dialog, InputText],
   templateUrl: './banque.page.html',
   styleUrl: './banque.page.css',
   providers:[ConfirmationService, MessageService]
@@ -89,6 +89,38 @@ export class BanquePage extends CustomDate implements OnInit{
       }
     }
   }
+
+  onDelete(event: Event, banque: Banque) {
+              this.confirmationService.confirm({
+                  target: event.target as EventTarget,
+                  message: 'Etes vous sure de vouloir supprimer cette position ?',
+                  header: 'Confirmation',
+                  closable: true,
+                  closeOnEscape: true,
+                  icon: 'pi pi-exclamation-triangle',
+                  rejectButtonProps: {
+                      label: 'Cancel',
+                      severity: 'secondary',
+                      outlined: true,
+                  },
+                  acceptButtonProps: {
+                      label: 'Delete',
+                      severity: 'danger'
+                  },
+                  accept: () => {
+                      // this.employeeService.delete(emp.id as number).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Employé supprimé avec succes' }))
+                     this.banqueService.delete(banque.id ).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Banque supprimée avec succes' })) 
+                  },
+                  reject: () => {
+                      // this.messageService.add({
+                      //     severity: 'error',
+                      //     summary: 'Rejected',
+                      //     detail: 'You have rejected',
+                      //     life: 3000,
+                      // });
+                  },
+              });
+      }
 
   refresh(){
     this.banqueService.findAll()

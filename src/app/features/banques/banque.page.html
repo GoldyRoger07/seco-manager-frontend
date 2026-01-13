@@ -60,7 +60,7 @@
             </ng-template>
             <ng-template #body let-banque>
                 <tr class="cursor-pointer" (click)="findEmployees(`?banque=${banque._id}`)">
-                    <td>{{ banque._id }}</td>
+                    <td>{{ banque.id }}</td>
                     <td>{{ banque.name }}</td>
                     
                     <td class="flex gap-1">

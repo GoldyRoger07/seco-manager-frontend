@@ -1,6 +1,6 @@
 export class TypeConge{
     constructor(
-        public _id = "",
+        public id = 0,
         public name = ""
     ){}
 }

@@ -26,7 +26,7 @@ export abstract class CrudService<T>{
         return this.http.put(this.url,element)
     }
 
-    delete(id: string): Observable<any>{
+    delete(id: number): Observable<any>{
         return this.http.delete(this.url+"/"+id)
     }
 }

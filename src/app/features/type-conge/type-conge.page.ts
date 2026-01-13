@@ -103,7 +103,7 @@ export class TypeCongePage extends CustomDate implements OnInit{
                 },
                 accept: () => {
                     // this.employeeService.delete(emp.id as number).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Employé supprimé avec succes' }))
-                   this.typeCongeService.delete(typeConge._id ).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Banque supprimée avec succes' })) 
+                   this.typeCongeService.delete(typeConge.id ).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Typede congé supprimé avec succes' })) 
                 },
                 reject: () => {
                     // this.messageService.add({

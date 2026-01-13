@@ -67,7 +67,7 @@
             </ng-template>
             <ng-template #body let-typeConge>
                 <tr class="cursor-pointer" (click)="findEmployees(`?typeConge=${typeConge._id}`)">
-                    <td>{{ typeConge._id }}</td>
+                    <td>{{ typeConge.id }}</td>
                     <td>{{ typeConge.name }}</td>
                     
                     <td class="flex gap-1">

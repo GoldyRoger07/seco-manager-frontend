@@ -64,12 +64,12 @@
             </ng-template>
             <ng-template #body let-departement>
                 <tr style="border: none !important; outline: none !important;" class="border-0 cursor-pointer hover:bg-gray-50 active:bg-gray-100" (click)="findEmployees(`?departement=${departement._id}`)">
-                    <td class="border-0">{{ departement._id }}</td>
+                    <td class="border-0">{{ departement.id }}</td>
                     <td>{{ departement.name }}</td>
                     
                     <td class="flex gap-1">
                         <p-button icon="pi pi-pencil" (click)="onUpdate(departement)"/>
-                        <p-button icon="pi pi-trash" severity="danger"/>
+                        <p-button icon="pi pi-trash" (click)="onDelete($event,departement)" severity="danger"/>
                     </td>
                 </tr>
             </ng-template>

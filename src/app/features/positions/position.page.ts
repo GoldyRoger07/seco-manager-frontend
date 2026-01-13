@@ -104,7 +104,7 @@ export class PositionPage extends CustomDate implements OnInit{
                 },
                 accept: () => {
                     // this.employeeService.delete(emp.id as number).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Employé supprimé avec succes' }))
-                   this.positionService.delete(position._id ).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Banque supprimée avec succes' })) 
+                   this.positionService.delete(position.id ).subscribe(() => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Position supprimée avec succes' })) 
                 },
                 reject: () => {
                     // this.messageService.add({
