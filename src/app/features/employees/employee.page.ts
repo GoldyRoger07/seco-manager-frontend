@@ -6,7 +6,7 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 import { IconField, IconFieldModule } from 'primeng/iconfield';
 import { InputIcon, InputIconModule } from 'primeng/inputicon';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Employee } from './employee.model';
+import { Employee, EmployeeForm } from './employee.model';
 import { FormsModule } from '@angular/forms';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { Dialog } from 'primeng/dialog';
@@ -32,6 +32,8 @@ interface SelectType{
   name: string;
   code: any;
 }
+
+
 
 @Component({
   selector: 'employee-page',
@@ -65,6 +67,7 @@ export class EmployeePage extends CustomDate implements OnInit{
   currentOperation: "add" | "update" | "view" = "add"
 
   employee = new Employee()
+  employeeForm = new Employee()
 
   sexes: SelectType[] = [
     { name: 'Masculin', code: 'MASCULIN' },
@@ -162,18 +165,18 @@ export class EmployeePage extends CustomDate implements OnInit{
         this.employee.dateNaissance = new Date(employee.dateNaissance)
         
         this.selectedDepartement = {
-          name: this.capitalizeFirstLetter(this.employee.departement.name),
-          code: this.employee.departement.id
+          name: this.capitalizeFirstLetter(this.employee.departement?.name || ''),
+          code: this.employee.departement?.id
         }
 
         this.selectedPosition = {
-          name: this.capitalizeFirstLetter(this.employee.position.name),
-          code: this.employee.position.id
+          name: this.capitalizeFirstLetter(this.employee.position?.name || ''),
+          code: this.employee.position?.id
         }
 
         this.selectedEtatCivil = {
-          name: this.capitalizeFirstLetter(this.employee.etatCivil.name),
-          code: this.employee.etatCivil.id
+          name: this.capitalizeFirstLetter(this.employee.etatCivil?.name || ''),
+          code: this.employee.etatCivil?.id
         }
 
         this.selectedSexe = {
@@ -182,22 +185,29 @@ export class EmployeePage extends CustomDate implements OnInit{
         }
 
         this.selectedBanque = {
-          name: this.capitalizeFirstLetter(this.employee.banque.name),
-          code: this.employee.banque.id
+          name: this.capitalizeFirstLetter(this.employee.banque?.name || ''),
+          code: this.employee.banque?.id
         }
 
         this.selectedTypeConge = {
-          name: this.capitalizeFirstLetter(this.employee.typeConge.name),
-          code: this.employee.typeConge.id
+          name: this.capitalizeFirstLetter(this.employee.typeConge?.name || ''),
+          code: this.employee.typeConge?.id
         }
     }
   
     onValidate() {
       if(this.employee.nom.length > 0){
         this.visible = false
+        this.employee.nif = this.employee.nif.toString()
+        this.employee.telephone = this.employee.telephone.toString()
+        this.employee.numCompteBancaire = this.employee.numCompteBancaire.toString()
+
+        
+        // this.employee.nif = this.employee.nif.toString()
         if(this.currentOperation === "add"){
           this.getInfoFromSelects()
-          this.employeeService.create(this.employee)
+          
+          this.employeeService.create(this.employeeForm)
           .subscribe({
             next: (response)=> {
               this.messageService.add({ severity: 'success', summary: 'Success', detail: 'employee crée avec succes' })
@@ -208,7 +218,7 @@ export class EmployeePage extends CustomDate implements OnInit{
           })
         }else{
           this.getInfoFromSelects()
-          this.employeeService.update(this.employee)
+          this.employeeService.update(this.employeeForm)
           .subscribe({
             next: (response)=> {
               console.log(response)
@@ -219,6 +229,8 @@ export class EmployeePage extends CustomDate implements OnInit{
         }
       }
     }
+
+    
 
     onDelete(event: Event, employee: Employee) {
             this.confirmationService.confirm({
@@ -280,12 +292,19 @@ export class EmployeePage extends CustomDate implements OnInit{
   }
 
   getInfoFromSelects(){
-    this.employee.departement.id = this.selectedDepartement.code 
-    this.employee.etatCivil.id =  this.selectedEtatCivil.code 
-    this.employee.position.id = this.selectedPosition.code ;
+    this.employee.departementId = this.selectedDepartement.code 
+    this.employee.etatCivilId =  this.selectedEtatCivil.code 
+    this.employee.positionId = this.selectedPosition.code ;
     this.employee.sexe = this.selectedSexe ? this.selectedSexe.code as 'MASCULIN' | 'FEMININ' : 'MASCULIN';
-    this.employee.banque.id = this.selectedBanque.code ;
-    this.employee.typeConge.id = this.selectedTypeConge.code
+    this.employee.banqueId = this.selectedBanque.code ;
+    this.employee.typeCongeId = this.selectedTypeConge.code
+
+    this.employeeForm = {...this.employee}
+    delete this.employeeForm.departement
+    delete this.employeeForm.etatCivil
+    delete this.employeeForm.position
+    delete this.employeeForm.banque
+    delete this.employeeForm.typeConge
 
     // console.log(this.selectedDepartement.code )
 

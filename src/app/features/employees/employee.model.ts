@@ -18,11 +18,37 @@ export class Employee{
         public adresse = "",
         public telephone = "",
         public nombreEnfant = 0,
-        public departement = new Departement(),
-        public position = new Position(),
-        public etatCivil = new EtatCivil(),
-        public typeConge = new TypeConge(),
-        public banque = new Banque(),
+        public departement ?: Departement,
+        public departementId?: number,
+        public position ?:Position,
+        public positionId?: number,
+        public etatCivil ?:EtatCivil,
+        public etatCivilId?: number,
+        public typeConge?:TypeConge,
+        public typeCongeId?: number,
+        public banque? :Banque,
+        public banqueId?: number,
         public numCompteBancaire = ""
     ){}
+}
+
+export interface EmployeeForm{
+  id: number
+  idEmployee: string
+  nom: string
+  prenom: string
+  dateNaissance: Date
+  dateEmbauche: Date
+  sexe: 'MASCULIN'|'FEMININ'
+  salaire: number
+  nif: string
+  adresse: string
+  telephone: string
+  nombreEnfant: number
+  departementId: number
+  banqueId: number
+  positionId: number
+  etatCivilId: number
+  typeCongeId: number,
+  numCompteBancaire: string
 }

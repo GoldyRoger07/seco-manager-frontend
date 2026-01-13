@@ -1,6 +1,5 @@
 @let departements = (departements$ | async) || [];
-@let employees = (employees$ | async) || [];
-
+<!-- @let employees = Employee[]; -->
 <!-- {{findEmployees(`?departement=${departements[0]._id}`)}} -->
 <div class="w-full h-full" >
     <div class="p-5 flex justify-between  border-b border-gray-100">
@@ -24,7 +23,7 @@
                 @for (employee of employees; track $index) {
 
                     <li class="p-2.5 flex justify-between">
-                        <span>{{($index+1)+".- "+employee.nom+" "+employee.prenom}}</span>
+                        <span>{{($index+1)+".- "+employee?.nom+" "+employee.prenom}}</span>
                         <!-- <span>{{employee.salaire | customCurrency}}</span> -->
                     </li>
                     <!-- <li class="p-2.5 flex justify-between">

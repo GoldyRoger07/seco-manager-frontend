@@ -15,6 +15,9 @@ import { ToastModule } from 'primeng/toast';
 import { EmployeeService } from '../employees/employee.service';
 import { CustomCurrencyPipe } from "../../share/custom-currency.pipe";
 import { CustomDate } from '../../share/custom-date.interface';
+import { Employee } from '../employees/employee.model';
+
+
 
 @Component({
   selector: 'departement-page',
@@ -29,6 +32,7 @@ export class DepartementPage extends CustomDate implements OnInit {
 
   employeeService = inject(EmployeeService)
   employees$ = this.employeeService.elements$
+  employees:Employee[]=[]
 
   departements$ = this.departementService.elements$
 
@@ -130,7 +134,7 @@ export class DepartementPage extends CustomDate implements OnInit {
     }
 
     findEmployees(query:string){
-      this.employeeService.findAll(query)
+      // this.employeeService.findAll(query)
     }
 
     

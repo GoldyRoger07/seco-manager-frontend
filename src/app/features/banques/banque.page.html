@@ -65,7 +65,7 @@
                     
                     <td class="flex gap-1">
                         <p-button icon="pi pi-pencil" (click)="onUpdate(banque)"/>
-                        <p-button icon="pi pi-trash" severity="danger"/>
+                        <p-button icon="pi pi-trash" (click)="onDelete($event,banque)" severity="danger"/>
                     </td>
                 </tr>
             </ng-template>

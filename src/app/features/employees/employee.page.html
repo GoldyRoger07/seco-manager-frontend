@@ -72,10 +72,10 @@
                     <td>{{ employee.sexe }}</td>
                     <td>{{ employee.nif }}</td>
                     <td>{{ employee.telephone }}</td>
-                    <td>{{ employee.position.name }}</td>
-                    <td>{{ employee.departement.name }}</td>
+                    <td>{{ employee.position?.name }}</td>
+                    <td>{{ employee.departement?.name }}</td>
                     <td>{{ employee.salaire }}</td>
-                    <td>{{ employee.typeConge.name }}</td>
+                    <td>{{ employee.typeConge?.name }}</td>
                     <td>
                         <div class="flex gap-2">
                             <button pButton [outlined]="true" class="mx-auto" (click)="onUpdate(employee)"  icon="pi pi-sync" >
@@ -141,7 +141,7 @@
             </div>
             <div class="grid grid-cols-2 gap-1 ">
                 <span  class="font-bold">Etat Civil:</span>
-                <span>{{employee.etatCivil.name}}</span>
+                <span>{{employee.etatCivil?.name}}</span>
             </div>
             <div class="grid grid-cols-2 gap-1 ">
                 <span  class="font-bold">Date D'embauche:</span>
@@ -149,11 +149,11 @@
             </div>
             <div class="grid grid-cols-2 gap-1 ">
                 <span  class="font-bold">Position:</span>
-                <span>{{employee.position.name}}</span>
+                <span>{{employee.position?.name}}</span>
             </div>
             <div class="grid grid-cols-2 gap-1 ">
                 <span class="font-bold" >Departement:</span>
-                <span>{{employee.departement.name}}</span>
+                <span>{{employee.departement?.name}}</span>
             </div>
             <div class="grid grid-cols-2 gap-1 ">
                 <span  class="font-bold">Nombre D'Enfant:</span>
@@ -165,7 +165,7 @@
             </div>
             <div class="grid grid-cols-2 gap-1 ">
                 <span class="font-bold">Banque:</span>
-                <span>{{employee.banque.name }}</span>
+                <span>{{employee.banque?.name }}</span>
             </div>
             <div class="grid grid-cols-2 gap-1 ">
                 <span class="font-bold">Numero Du Compte:</span>
