@@ -1,5 +1,5 @@
 @let etatCivils = (etatCivils$ | async) || [];
-@let employees = (employees$ | async) || [];
+
 <div class="w-full h-full" >
     <div class="p-5 flex justify-between  border-b border-gray-100">
         <h2 class="text-2xl font-bold text-gray-700">Gestion Des Etat Civils</h2>
@@ -8,7 +8,7 @@
 
     
 
-    <div class="grid grid-cols-[1fr_2fr] h-[calc(100%-72px)]">
+    <div class="grid grid-cols-[350px_2fr] h-[calc(100%-72px)]">
 
 
         
@@ -28,7 +28,7 @@
                     
                 }@empty {
                     <li class="text-sm text-gray-400 text-center pt-10">
-                        Cliquer sur un etat civil afin d'afficher les employes correspondant
+                        Cliquer sur un etat civil afin d'afficher les employés correspondant
                     </li>
                 }
             </ol>
@@ -65,7 +65,7 @@
                 </tr>
             </ng-template>
             <ng-template #body let-etatCivil>
-                <tr class="cursor-pointer" (click)="findEmployees(`?etatCivil=${etatCivil._id}`)">
+                <tr class="cursor-pointer" (click)="setEmployees(etatCivil.employees)">
                     <td>{{ etatCivil.id }}</td>
                     <td>{{ etatCivil.name }}</td>
                     

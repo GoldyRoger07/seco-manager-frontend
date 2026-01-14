@@ -3,8 +3,13 @@
         <div class="h-25 p-5">
             <img class="w-25" src="img/new_seco_logo.png" alt="logo">
         </div>
+        
 
         <div class="text-gray-700">
+            <div class="flex items-center gap-2.5 cursor-pointer px-5 py-2.5 border-y border-gray-100 hover:border-gray-300" routerLink="/dashboard" routerLinkActive="bg-gray-200 border-gray-300 font-bold">
+                <i class="pi pi-th-large"></i>
+                Dashboard
+            </div>
             <div class="flex items-center gap-2.5 cursor-pointer px-5 py-2.5 border-y border-gray-100 hover:border-gray-300" routerLink="/employees" routerLinkActive="bg-gray-200 border-gray-300 font-bold">
                 <i class="pi pi-users"></i>
                 Employés
@@ -36,7 +41,7 @@
             <div class="h-full w-full flex flex-col justify-center items-center gap-3">
                 <img class="w-75" src="img/welcome.png" alt="welcome-img">
                 <p class="text-gray-700 w-110 text-center"> <strong>Secogroupe Manager</strong>, un logiciel conçu sur mesure pour assurer une gestion optimale de vos employés</p>
-                <p-button  routerLink="/employees" [raised]="true">Commencer Maintenant</p-button>
+                <p-button  routerLink="/departements" [raised]="true">Commencer Maintenant</p-button>
                 <!-- <a routerLink="/employees" [raised]="true" pButton></a> -->
             </div>
         }@else {

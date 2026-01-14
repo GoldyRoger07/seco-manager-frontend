@@ -9,7 +9,7 @@
 
     
 
-    <div class="grid grid-cols-[1fr_2fr] h-[calc(100%-72px)]">
+    <div class="grid grid-cols-[350px_2fr] h-[calc(100%-72px)]">
 
 
         
@@ -32,7 +32,7 @@
                     </li> -->
                 }@empty {
                     <li class="text-sm text-gray-400 text-center pt-10">
-                        Cliquer sur un departement afin d'afficher les employes correspondant
+                        Cliquer sur un département afin d'afficher les employés correspondant
                     </li>
                 }
             </ol>
@@ -62,7 +62,7 @@
                 </tr>
             </ng-template>
             <ng-template #body let-departement>
-                <tr style="border: none !important; outline: none !important;" class="border-0 cursor-pointer hover:bg-gray-50 active:bg-gray-100" (click)="findEmployees(`?departement=${departement._id}`)">
+                <tr style="border: none !important; outline: none !important;" class="border-0 cursor-pointer hover:bg-gray-50 active:bg-gray-100" (click)="setEmployees(departement.employees)">
                     <td class="border-0">{{ departement.id }}</td>
                     <td>{{ departement.name }}</td>
                     

@@ -16,6 +16,7 @@ import { EmployeeService } from '../employees/employee.service';
 import { CustomDate } from '../../share/custom-date.interface';
 import { TooltipModule } from 'primeng/tooltip';
 import { TooltipDirective } from '../../shared/tooltip';
+import { Employee } from '../employees/employee.model';
 
 @Component({
   selector: 'banque-page',
@@ -28,11 +29,10 @@ export class BanquePage extends CustomDate implements OnInit{
 
   banqueService = inject(BanqueService)
 
-  employeeService = inject(EmployeeService)
-
+  
   banques$ = this.banqueService.elements$
 
-  employees$ = this.employeeService.elements$
+  employees:Employee[] = []
 
   visible = false
 
@@ -141,8 +141,9 @@ export class BanquePage extends CustomDate implements OnInit{
     this.refresh()
   }
 
-  findEmployees(query:string){
-      this.employeeService.findAll(query)
+  setEmployees(employees: Employee[]){
+            
+           this.employees = employees
   }
   
 }

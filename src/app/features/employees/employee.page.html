@@ -27,13 +27,14 @@
             [rowsPerPageOptions]="[5,10,20]" 
             [paginator]="true"
             [globalFilterFields]="['nom', 'prenom', 'salaire', 'departement', 'position', 'typeConge', 'telephone', 'nif', 'idEmployee','sexe']"
-            [tableStyle]="{ 'min-width': '10rem' }">
+            [tableStyle]="{ 'min-width': '10rem' }"
+            [exportHeader]="'customExportHeader'">
             <ng-template #caption>
                 <div class="flex">
-                    <div class="flex gap-1">
+                    <div class="flex gap-2">
                         <p-button (click)="onAdd()" icon="pi pi-plus" label="Ajouter" />
                         <p-button (click)="refresh()" label="Actualiser" icon="pi pi-refresh" variant="outlined" severity="secondary"/>
-
+                        <!-- <p-button icon="pi pi-external-link" label="Export" (click)="dt2.exportCSV()" variant="outlined" severity="secondary" /> -->
                     </div>
                     <p-iconfield iconemployee="left" class="ml-auto">
                         <p-inputicon>
@@ -175,76 +176,76 @@
     }@else{
         <div class="flex flex-col gap-2">
                 <div class="flex flex-col gap-1">
-                    <label for="idEmployee" class="font-semibold ">ID</label>
+                    <label for="idEmployee" class="font-semibold ">ID*</label>
                     <input pInputText id="idEmployee" [(ngModel)]="employee.idEmployee" [fluid]="true" class="flex-auto" placeholder="Entrer l'ID" autocomplete="off" />
                 </div>
                 <div class="flex gap-1">
                     <div class="flex flex-col gap-1">
-                        <label for="nom" class="font-semibold ">Nom</label>
+                        <label for="nom" class="font-semibold ">Nom*</label>
                         <input pInputText id="nom" [(ngModel)]="employee.nom" class="flex-auto" placeholder="Entrer le nom" [fluid]="true" autocomplete="off" />
                     </div>
                     <div class="flex flex-col gap-1">
-                        <label for="prenom" class="font-semibold ">Prenom</label>
+                        <label for="prenom" class="font-semibold ">Prenom*</label>
                         <input pInputText id="prenom" [(ngModel)]="employee.prenom" [fluid]="true" placeholder="Entrer le prenom" class="flex-auto" autocomplete="off" />
                     </div>
                 </div>
                 
                 <div class="flex flex-col gap-1">
-                        <label for="sexe" class="font-semibold ">Sexe</label>
+                        <label for="sexe" class="font-semibold ">Sexe*</label>
                         <p-select [options]="sexes" [fluid]="true" [(ngModel)]="selectedSexe" optionLabel="name" placeholder="Selectionner le sexe" class="w-full md:w-56" />
                 </div>
                 <div class="flex flex-col gap-1">
-                        <label for="telephone" class="font-semibold ">Telephone</label>
+                        <label for="telephone" class="font-semibold ">Telephone*</label>
                         <input pInputText type="number" id="telephone" [(ngModel)]="employee.telephone" [fluid]="true" class="flex-auto" placeholder="Entrer le lelephone" autocomplete="off" />
                 </div>
                 <div class="flex flex-col gap-1">
-                        <label for="dateNaissance" class="font-semibold ">Date De Naissance</label>
+                        <label for="dateNaissance" class="font-semibold ">Date De Naissance*</label>
                         <p-datepicker id="dateNaissance" [fluid]="true" [(ngModel)]="employee.dateNaissance" />
                 </div>
                 <div class="flex flex-col gap-1">
-                        <label for="adresse" class="font-semibold ">Adresse</label>
+                        <label for="adresse" class="font-semibold ">Adresse*</label>
                         <input pInputText id="adresse" [fluid]="true" [(ngModel)]="employee.adresse" class="flex-auto" placeholder="Entrer l'adresse" autocomplete="off" />
                 </div>
                 <div class="flex flex-col gap-1">
-                        <label for="nif" class="font-semibold ">NIF</label>
+                        <label for="nif" class="font-semibold ">NIF*</label>
                         <input pInputText type="number" id="nif" [fluid]="true" [(ngModel)]="employee.nif" class="flex-auto" placeholder="Entrer le NIF" autocomplete="off" />
                 </div>
                 <div class="flex flex-col gap-1">
-                        <label for="nif" class="font-semibold ">Departement</label>
+                        <label for="nif" class="font-semibold ">Departement*</label>
                         <p-select [options]="departements" [fluid]="true" [(ngModel)]="selectedDepartement" optionLabel="name" placeholder="Selectionner un departement" class="w-full md:w-56" />
                 </div>
                 <div class="flex flex-col gap-1">
-                        <label for="nif" class="font-semibold ">Position</label>
+                        <label for="nif" class="font-semibold ">Position*</label>
                         <p-select [options]="positions" [fluid]="true" [(ngModel)]="selectedPosition" optionLabel="name" placeholder="Selectionner une position" class="w-full md:w-56" />
                 </div>
                 <div class="flex flex-col gap-1">
-                        <label for="etatCivil" class="font-semibold ">Etat Civil</label>
+                        <label for="etatCivil" class="font-semibold ">Etat Civil*</label>
                         <p-select id="etatCivil" [fluid]="true" [options]="etatCivils" [(ngModel)]="selectedEtatCivil" optionLabel="name" placeholder="Selectionner un etat civil" class="w-full md:w-56" />
                 </div>
                 
                 <div class="flex flex-col gap-1">
-                        <label for="dateEmbauche" class="font-semibold ">Date D'Embauche</label>
+                        <label for="dateEmbauche" class="font-semibold ">Date D'Embauche*</label>
                         <p-datepicker id="dateEmbauche" [fluid]="true" [(ngModel)]="employee.dateEmbauche" />
                 </div>
                 
                 <div class="flex flex-col gap-1">
-                        <label for="nbEnfant" class="font-semibold ">Nombre d'Enfant</label>
+                        <label for="nbEnfant" class="font-semibold ">Nombre d'Enfant*</label>
                         <input pInputText type="number" id="nbEnfant" [(ngModel)]="employee.nombreEnfant" [fluid]="true" class="flex-auto" placeholder="Entrer le nombre d'enfant" autocomplete="off" />
                 </div>
                 <div class="flex flex-col gap-1">
-                        <label for="salaire" class="font-semibold ">Salaire (HTG)</label>
+                        <label for="salaire" class="font-semibold ">Salaire (HTG)*</label>
                         <input type="number" pInputText id="salaire" [fluid]="true" [(ngModel)]="employee.salaire" class="flex-auto" placeholder="Entrer le salaire" autocomplete="off" />
                 </div>
                 <div class="flex flex-col gap-1">
-                        <label for="conge" class="font-semibold ">Type de Congé</label>
+                        <label for="conge" class="font-semibold ">Type de Congé*</label>
                         <p-select id="conge" [options]="typeConges" [fluid]="true" [(ngModel)]="selectedTypeConge" optionLabel="name" placeholder="Selectionner un Type de Conge" class="w-full md:w-56" />
                 </div>
                 <div class="flex flex-col gap-1">
-                        <label for="nif" class="font-semibold ">Banque</label>
+                        <label for="nif" class="font-semibold ">Banque*</label>
                         <p-select  [options]="banques" [fluid]="true" [(ngModel)]="selectedBanque" optionLabel="name" placeholder="Selectionner une Banque" class="w-full md:w-56" />
                 </div>
                 <div class="flex flex-col gap-1">
-                        <label for="numeroCompte" class="font-semibold ">Numero Compte</label>
+                        <label for="numeroCompte" class="font-semibold ">Numero Compte*</label>
                         <input pInputText type="number" id="numeroCompte" [(ngModel)]="employee.numCompteBancaire" placeholder="Entrer le numero de compte" [fluid]="true" class="flex-auto" autocomplete="off" />
                 </div>
 

@@ -14,6 +14,7 @@ import { EtatCivilService } from './etat-civil.service';
 import { EtatCivil } from './etat-civil.model';
 import { EmployeeService } from '../employees/employee.service';
 import { CustomDate } from '../../share/custom-date.interface';
+import { Employee } from '../employees/employee.model';
 
 @Component({
   selector: 'etat-civil-page',
@@ -31,8 +32,8 @@ export class EtatCivilPage extends CustomDate implements OnInit{
   
     etatCivils$ = this.etatCivilService.elements$
 
-    employeeService = inject(EmployeeService)
-    employees$ = this.employeeService.elements$
+    
+    employees:Employee[] = []
     
   
     visible = false
@@ -125,7 +126,9 @@ export class EtatCivilPage extends CustomDate implements OnInit{
       }
 
   
-      findEmployees(query:string){
-        this.employeeService.findAll(query)
+      setEmployees(employees: Employee[]){
+          console.log(employees)
+         this.employees = employees
       }
 }
+ 

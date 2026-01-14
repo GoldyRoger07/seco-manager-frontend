@@ -30,8 +30,7 @@ export class DepartementPage extends CustomDate implements OnInit {
 
   departementService = inject(DepartementService)
 
-  employeeService = inject(EmployeeService)
-  employees$ = this.employeeService.elements$
+  
   employees:Employee[]=[]
 
   departements$ = this.departementService.elements$
@@ -133,8 +132,9 @@ export class DepartementPage extends CustomDate implements OnInit {
      this.departementService.findAll()
     }
 
-    findEmployees(query:string){
-      // this.employeeService.findAll(query)
+    setEmployees(employees: Employee[]){
+          console.log(employees)
+         this.employees = employees
     }
 
     

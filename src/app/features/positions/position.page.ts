@@ -32,8 +32,6 @@ export class PositionPage extends CustomDate implements OnInit{
 
   positions$ = this.positionService.elements$
 
-  employeeService = inject(EmployeeService)
-  employees$ = this.employeeService.elements$
   
 
   visible = false

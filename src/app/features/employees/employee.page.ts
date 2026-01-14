@@ -33,6 +33,17 @@ interface SelectType{
   code: any;
 }
 
+interface ExportColumn {
+    title: string;
+    dataKey: string;
+}
+
+interface Column {
+    field: string;
+    header: string;
+    customExportHeader?: string;
+}
+
 
 
 @Component({
@@ -62,7 +73,7 @@ export class EmployeePage extends CustomDate implements OnInit{
   visible = false
 
   headerDialogTitle = "Title"
-  headerDialogSubtitle = "Les champs annotes avec un * sont obligatoire"
+  headerDialogSubtitle = "Les champs annotes avec un * sont obligatoires"
 
   currentOperation: "add" | "update" | "view" = "add"
 
@@ -115,6 +126,10 @@ export class EmployeePage extends CustomDate implements OnInit{
     code: 0
   };
 
+  cols!:Column[]
+
+  exportColumns!: ExportColumn[];
+
   ngOnInit(): void {
     this.employeeService.findAll()
     this.banques$ = this.banqueService.elements$
@@ -128,6 +143,20 @@ export class EmployeePage extends CustomDate implements OnInit{
     this.etatCivilService.findAll()
     this.typeCongeService.findAll()
     this.positionService.findAll()
+
+    this.cols = [
+            { field: 'nom', header: 'Nom' },
+            { field: 'prenom', header: 'Prenom' },
+            { field: 'sexe', header: 'Sexe' },
+            { field: 'nif', header: 'Nif' },
+            { field: 'telephone', header: 'Telephone' },
+            { field: 'position.name', header: 'Position' },
+            { field: 'departement', header: 'Departement' },
+            { field: 'salaire', header: 'Salaire' },
+            { field: 'typeConge.name', header: 'Conge' },
+    ];
+
+        this.exportColumns = this.cols.map((col) => ({ title: col.header, dataKey: col.field }));
   }
 
     onView(employee:Employee){
