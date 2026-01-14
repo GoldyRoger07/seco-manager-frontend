@@ -14,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { EmployeeService } from '../employees/employee.service';
 import { CustomDate } from '../../share/custom-date.interface';
+import { Employee } from '../employees/employee.model';
 
 @Component({
   selector: 'position-page',
@@ -42,6 +43,7 @@ export class PositionPage extends CustomDate implements OnInit{
   currentOperation: "add" | "update" = "add"
 
   position = new Position()
+  employees: Employee[] = []
 
   onAdd(){
         this.visible = true
@@ -124,8 +126,9 @@ export class PositionPage extends CustomDate implements OnInit{
       this.positionService.findAll()
     }
 
-    findEmployees(query:string){
-      this.employeeService.findAll(query)
+    setEmployees(employees: Employee[]){
+          console.log(employees)
+         this.employees = employees
     }
 
 

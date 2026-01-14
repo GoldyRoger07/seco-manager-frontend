@@ -14,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
 import { TypeConge } from './type-conge.model';
 import { EmployeeService } from '../employees/employee.service';
 import { CustomDate } from '../../share/custom-date.interface';
+import { Employee } from '../employees/employee.model';
 
 @Component({
   selector: 'type-conge-page',
@@ -29,8 +30,8 @@ export class TypeCongePage extends CustomDate implements OnInit{
 
   messageService = inject(MessageService)
 
-  employeeService = inject(EmployeeService)
-  employees$ = this.employeeService.elements$
+  // employeeService = inject(EmployeeService)
+  employees:Employee[] = []
   
 
   typeConges$ = this.typeCongeService.elements$
@@ -124,8 +125,9 @@ export class TypeCongePage extends CustomDate implements OnInit{
       this.refresh()
     }
 
-    findEmployees(query:string){
-      this.employeeService.findAll(query)
+    setEmployees(employees: Employee[]){
+      console.log(employees)
+     this.employees = employees
     }
 
 }

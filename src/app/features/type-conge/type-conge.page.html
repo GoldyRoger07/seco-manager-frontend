@@ -1,6 +1,4 @@
 @let typeConges = (typeConges$ | async) || [];
-@let employees = (employees$ | async) || [];
-
 <div class="w-full h-full" >
     <div class="p-5 flex justify-between  border-b border-gray-100">
         <h2 class="text-2xl font-bold text-gray-700">Gestion Des Type De Congés</h2>
@@ -66,7 +64,7 @@
                 </tr>
             </ng-template>
             <ng-template #body let-typeConge>
-                <tr class="cursor-pointer" (click)="findEmployees(`?typeConge=${typeConge._id}`)">
+                <tr class="cursor-pointer" (click)="setEmployees(typeConge.employees)">
                     <td>{{ typeConge.id }}</td>
                     <td>{{ typeConge.name }}</td>
                     

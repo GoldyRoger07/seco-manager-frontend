@@ -1,7 +1,7 @@
 @let banques = (banques$ | async) || [];
 @let employees = (employees$ | async) || [];
 
-<div class="w-full h-full" >
+<div class="w-full h-full " >
     <div class="p-5 flex justify-between  border-b border-gray-100">
         <h2 class="text-2xl font-bold text-gray-700">Gestion Des Banques</h2>
         <span>{{today() | date}}</span>
@@ -9,7 +9,7 @@
 
     
 
-    <div class="grid grid-cols-[1.5fr_2fr] h-[calc(100%-72px)]">
+    <div class="grid grid-cols-[350px_1fr] h-[calc(100%-72px)]">
 
 
         
@@ -17,7 +17,10 @@
             <div class="py-3 px-5 border-b border-gray-100 h-[67px] flex flex-col">
                 
                 <h2 class="text-md text-gray-700 font-bold">Employés</h2>
-                <small class="text-gray-500">Liste des employés ayant un compte bancaire au pres de cette banque</small>
+                <small class="text-gray-500 truncate" [appTooltip]="tooltipText"
+  tooltipPosition="right">Liste des employés ayant un compte bancaire au pres de cette banque</small>
+               
+
             </div>
             <ol class="p-5 flex flex-col h-full overflow-auto" >
                  @for (employee of employees; track $index) {

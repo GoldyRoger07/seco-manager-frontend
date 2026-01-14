@@ -14,11 +14,12 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { EmployeeService } from '../employees/employee.service';
 import { CustomDate } from '../../share/custom-date.interface';
-import { CustomCurrencyPipe } from "../../share/custom-currency.pipe";
+import { TooltipModule } from 'primeng/tooltip';
+import { TooltipDirective } from '../../shared/tooltip';
 
 @Component({
   selector: 'banque-page',
-  imports: [ReactiveFormsModule, FormsModule, TableModule, IconField, InputIcon, Button, CommonModule, ToastModule, ConfirmDialog, Dialog, InputText],
+  imports: [TooltipDirective, TooltipModule, ReactiveFormsModule, FormsModule, TableModule, IconField, InputIcon, Button, CommonModule, ToastModule, ConfirmDialog, Dialog, InputText],
   templateUrl: './banque.page.html',
   styleUrl: './banque.page.css',
   providers:[ConfirmationService, MessageService]
@@ -44,6 +45,15 @@ export class BanquePage extends CustomDate implements OnInit{
   currentOperation: "add" | "update" = "add"
 
   banque = new Banque();
+
+  tooltipOptions = {
+        showDelay: 150,
+        autoHide: false,
+        tooltipEvent: 'hover',
+        tooltipPosition: 'left'
+  };
+
+  tooltipText = " Liste des employés ayant un compte bancaire au pres de cette banque"
 
   formGroupe = new FormGroup({
     name: new FormControl('',[Validators.required])

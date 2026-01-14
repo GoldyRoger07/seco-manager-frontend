@@ -1,5 +1,4 @@
 @let positions = (positions$ | async) || [];
-@let employees = (employees$ | async) || [];
 
 <div class="w-full h-full" >
     <div class="p-5 flex justify-between  border-b border-gray-100">
@@ -66,7 +65,7 @@
                 </tr>
             </ng-template>
             <ng-template #body let-position>
-                <tr class="cursor-pointer" (click)="findEmployees(`?position=${position._id}`)">
+                <tr class="cursor-pointer" (click)="setEmployees(position.employees)">
                     <td>{{ position.id }}</td>
                     <td>{{ position.name }}</td>
                     
