@@ -15,10 +15,11 @@ import { TypeConge } from './type-conge.model';
 import { EmployeeService } from '../employees/employee.service';
 import { CustomDate } from '../../share/custom-date.interface';
 import { Employee } from '../employees/employee.model';
+import { TooltipDirective } from '../../shared/tooltip';
 
 @Component({
   selector: 'type-conge-page',
-  imports: [FormsModule,TableModule, IconField, InputIcon, Button, CommonModule, ToastModule, ConfirmDialog, Dialog, InputText],
+  imports: [TooltipDirective,FormsModule,TableModule, IconField, InputIcon, Button, CommonModule, ToastModule, ConfirmDialog, Dialog, InputText],
   templateUrl: './type-conge.page.html',
   styleUrl: './type-conge.page.css',
   providers:[ConfirmationService, MessageService]
@@ -43,6 +44,8 @@ export class TypeCongePage extends CustomDate implements OnInit{
   currentOperation: "add" | "update" = "add"
 
   typeConge = new TypeConge()
+
+  tooltipText = "Liste des employés ayant ce type de congé en commun";
 
   onAdd(){
         this.visible = true

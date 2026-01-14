@@ -15,7 +15,7 @@
             <div class="py-3 px-5 border-b border-gray-100 h-[67px] flex flex-col">
                 
                 <h2 class="text-md text-gray-700 font-bold">Employés</h2>
-                <small class="text-gray-500">Liste des employés ayant ce type de congé en commun</small>
+                <small class="text-gray-500 truncate" [appTooltip]="tooltipText" tooltipPosition="right">Liste des employés ayant ce type de congé en commun...</small>
             </div>
             <ol class="p-5 flex flex-col h-full overflow-auto" >
                 @for (employee of employees; track $index) {
