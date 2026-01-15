@@ -7,9 +7,11 @@ import { EtatCivilPage } from './features/etat-civils/etat-civil.page';
 import { TypeCongePage } from './features/type-conge/type-conge.page';
 import { PositionPage } from './features/positions/position.page';
 import { DashboardPage } from './features/dashboard/dashboard.page';
+import { IdCard } from './features/id-card/id-card';
 
 export const routes: Routes = [
     {  path: '', component: HomePage, children:[
+        {path: 'id-card', component: IdCard},
         {path: 'dashboard', component: DashboardPage},
         {path: 'employees', component: EmployeePage},
         {path: 'departements', component: DepartementPage},

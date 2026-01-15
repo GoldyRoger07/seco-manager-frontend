@@ -1,0 +1,78 @@
+
+<div class="w-full h-full" >
+    <div class="p-5 flex justify-between  border-b border-gray-100">
+        <h2 class="text-2xl font-bold text-gray-700">Génération de carte d'identité</h2>
+        <span>{{ today() | date}}</span>
+    </div>
+    <div class="pb-5 w-full h-[calc(100%-73px)] grid grid-cols-[500px_1fr]">
+            <div class="p-5 border-r border-gray-100">
+                <h1 class="text-gray-700 text-[16px] font-bold">Générer une carte d'identité pour un agent de Seco Sécurité</h1>
+                <small class="text-gray-600">Remplissez tous les champs ci-dessous afin de générer correctement le recto de la carte</small><br/>
+                <small class="text-gray-600">Assurez-vous que la photo de l'agent respecte cette dimension : 300x300</small>
+                <form [formGroup]="badgeForm" (ngSubmit)="submit()" class="flex flex-col gap-4 mt-5">
+                    <div class="flex flex-col gap-1">
+                        <label for="id" class="font-semibold text-gray-700">ID</label>
+                        <input pInputText id="id" formControlName="id"  [fluid]="true" class="flex-auto" placeholder="Entrez l'ID de l'Agent" autocomplete="off" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="nom" class="font-semibold text-gray-700 ">Nom Complet</label>
+                        <input pInputText id="nom" formControlName="nom"  [fluid]="true" class="flex-auto" placeholder="Entrez le nom complet de l'agent" autocomplete="off" />
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+
+                        <div class="flex flex-col gap-1">
+                            <label for="nif" class="font-semibold text-gray-700 ">NIF/CIN</label>
+                            <input pInputText id="nif" formControlName="nif"  [fluid]="true" class="flex-auto" placeholder="Entrez le NIF de l'agent" autocomplete="off" />
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="groupeSanguin" class="font-semibold text-gray-700 ">Groupe Sanguin</label>
+                            
+                            <p-select [options]="items" formControlName="groupeSanguin" optionLabel="Groupe Sanguin" placeholder="Choisissez le groupe sanguin de l'agent" class="w-full md:w-56" />
+                        </div>
+                    </div>
+                    <div class="upload-container">
+                        
+                        
+                        <div class="flex">
+                            <input
+                              type="file"
+                              id="photoInput"
+                              accept="image/*"
+                              (change)="onFileChange($event)"
+                              hidden
+                            />
+                            <label for="photoInput" class="upload-box">
+                                <span class="icon">📷</span>
+                                <span class="text">Ajouter la photo de l'agent</span>
+                                <small class="text-gray-500">Dimension requise: 300x300</small>
+                            </label>
+
+                            <img *ngIf="photoPreview" [src]="photoPreview" class="preview" />
+                        </div>
+
+                    </div>
+
+                    <p-button label="Générer La Carte" [fluid]="true" severity="primary"  />
+                </form>
+            </div>
+            <div class="p-5">
+                <div class="w-full flex flex-col gap-3">
+                    <!-- <p-skeleton width="100%" height="auto" /> -->
+                    <div class="flex gap-2">
+                        @if(cardIdPreview){
+                            <img [src]="cardIdPreview" class="w-[50%] drop-shadow-xl drop-shadow-gray-400" alt="carte-id">
+                        }@else{
+
+                            <img src="img/recto-id-card-4.png" class="w-[50%] drop-shadow-xl drop-shadow-gray-400" alt="carte-id">
+                        }
+                        
+                        <img src="img/verso-id-card-4.png" class="w-[50%] drop-shadow-xl drop-shadow-gray-400" alt="carte-id">
+
+                    </div>
+                    <a [href]="cardIdPreview" download="badge.png">
+                        <p-button icon="pi pi-download"  class="w-[80%]" label="Télécharger La Carte"  severity="primary"  />
+                    </a>                    
+                </div>
+            </div>
+    </div>
+</div>

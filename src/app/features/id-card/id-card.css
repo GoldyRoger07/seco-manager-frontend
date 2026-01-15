@@ -1,0 +1,44 @@
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.upload-box {
+  /* width: 220px;
+  height: 140px; */
+  width: 100%;
+  height: 140px;
+  border: 2px dashed #ccc;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+  background: #f9f9f9;
+}
+
+.upload-box:hover {
+  border-color: #0099ff;
+  background: #f1f1f1;
+}
+
+.upload-box .icon {
+  font-size: 32px;
+}
+
+.upload-box .text {
+  font-size: 14px;
+  color: #555;
+}
+
+.preview {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+}
