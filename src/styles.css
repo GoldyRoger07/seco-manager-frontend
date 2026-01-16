@@ -5,6 +5,14 @@
 @import "primeicons/primeicons.css";
 /* @plugin "tailwindcss-primeui"; */
 
+
+:root{
+  --p-progressspinner-color-one: #fff !important;
+  --p-progressspinner-color-two: #fff !important;
+  --p-progressspinner-color-three: #fff !important;
+  --p-progressspinner-color-four: #fff !important;
+}
+
 html, body{
     height: 100%;
     width: 100%;

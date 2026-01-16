@@ -10,6 +10,6 @@ export class IdCardService {
   url = inject(UrlService)
 
   createCardId(badgeForm: any){
-    return this.http.post(this.url.serverUrl+"/badges/create", badgeForm,{responseType:'blob'})
+    return this.http.post(this.url.serverUrl+"/badges/create", badgeForm)
   }
 }
