@@ -6,6 +6,6 @@ import { inject, Injectable } from '@angular/core';
 })
 export class UrlService {
 
-  serverUrl = "http://localhost:3000/api"
+  serverUrl = "http://localhost:8080/api"
 
 }
