@@ -1,42 +1,130 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import "tailwindcss"; */
+
+/* @theme { */
+  /* Définition de vos variables Windows 11 */
+  /* --color-win-bg: #f0f3f9;
+  --color-win-card: #ffffff;
+  --color-win-hover: #eef2f5;
+  --color-win-primary: #0067c0;
+  --color-win-text: #1f1f1f;
+  --color-win-text-sec: #5d5d5d; */
+
+  /* Ombre portée typique de Windows 11 (Fluent) */
+  /* --shadow-fluent: 0 2px 4px rgba(0,0,0,0.04), 0 4px 8px rgba(0,0,0,0.04); */
+  
+  /* Police système */
+  /* --font-sans: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; */
+/* } */
+
+/* --- Intégration PrimeNG --- */
+/* On s'assure que PrimeNG ne se fait pas écraser par le reset de Tailwind */
+/* @layer primeng, tailwind-utilities; */
+
+/* @import "primeng/resources/themes/lara-light-blue/theme.css" layer(primeng);
+@import "primeng/resources/primeng.css" layer(primeng); */
+/* @import "primeicons/primeicons.css" layer(primeng); */
+
+/* 1. Tailwind Directives - OBLIGATOIRE EN PREMIER */
+
+
+/* PrimeNG s'injectera automatiquement dans la couche 'primeng' si configuré, 
+   sinon l'ordre d'import standard suffit généralement pour commencer. */
+/* Vos autres styles... */
+
+/* @import "tailwindcss";
+@import "tailwindcss-primeui";
+@import "primeicons/primeicons.css";
+@plugin "tailwindcss-primeui";
+
+ */
 
 @import "tailwindcss";
 @import "tailwindcss-primeui";
-@import "primeicons/primeicons.css";
-/* @plugin "tailwindcss-primeui"; */
+/* 1. Définition des couches de priorité */
+@layer primeng, tailwind-utilities;
 
+/* 2. Import du thème PrimeNG dans sa couche dédiée */
+/* Note : Vérifiez que le chemin correspond à votre installation */
+/* @import "primeng/resources/themes/lara-light-blue/theme.css" layer(primeng);
+@import "primeng/resources/primeng.css" layer(primeng); */
+@import "primeicons/primeicons.css" layer(primeng);
 
-:root{
-  --p-progressspinner-color-one: #fff !important;
-  --p-progressspinner-color-two: #fff !important;
-  --p-progressspinner-color-three: #fff !important;
-  --p-progressspinner-color-four: #fff !important;
+@theme {
+  --color-win-bg: #f0f3f9;
+  --color-win-primary: #0067c0;
+  --color-win-text: #1f1f1f;
+  --color-win-text-sec: #5d5d5d;
+  --color-win-card-bg: #fff;
+  --shadow-fluent: 0 2px 4px rgba(0,0,0,0.04), 0 4px 8px rgba(0,0,0,0.04);
 }
 
-html, body{
-    height: 100%;
-    width: 100%;
-}
-
-
-.vscode-tooltip {
-  position: fixed;
-  background: #fff;
-  color: #3a3a3a;
-  max-width: 400px;
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  /* font-family: Consolas, monospace; */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0;
-  animation: fadeIn 0.15s ease forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
+/* 3. Correctif pour les Dialogues PrimeNG (Le fix pour la transparence) */
+@layer primeng {
+  .p-dialog {
+    min-height: 450px;
+    background: #ffffff !important; /* Force le fond blanc */
+    border-radius: 12px !important;
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
   }
+  
+  .p-dialog-header {
+    background: #ffffff !important;
+    padding: 1.5rem 1.5rem 0 1.5rem !important;
+    border-top-right-radius: 12px !important;
+    border-top-left-radius: 12px !important;
+  }
+
+  .p-dialog-content {
+    background: #ffffff !important;
+    padding: 1.5rem !important;
+    border-bottom-right-radius: 12px !important;
+    border-bottom-left-radius: 12px !important;
+  }
+
+  /* Assombrit le fond quand le dialogue est ouvert */
+  .p-component-overlay {
+    backdrop-filter: blur(4px);
+    background-color: rgba(0, 0, 0, 0.4) !important;
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.p-dialog{
+  min-height: max-content;
+}
+
+.table.enable{
+  position: relative;
+}
+
+.table.enable::before{
+  content: "⚠️ Cette table est désactivée";
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  text-shadow: #fdfdfdb7 1px 0 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ff0000b7;
+  z-index: 3;
 }

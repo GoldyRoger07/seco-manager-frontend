@@ -1,23 +1,26 @@
 import { Routes } from '@angular/router';
-import { HomePage } from './features/home/home.page';
-import { EmployeePage } from './features/employees/employee.page';
-import { DepartementPage } from './features/departements/departement.page';
-import { BanquePage } from './features/banques/banque.page';
-import { EtatCivilPage } from './features/etat-civils/etat-civil.page';
-import { TypeCongePage } from './features/type-conge/type-conge.page';
-import { PositionPage } from './features/positions/position.page';
-import { DashboardPage } from './features/dashboard/dashboard.page';
-import { IdCard } from './features/id-card/id-card';
+import { MainLayoutComponent } from './layout/main-layout.component';
+import { SignupComponent } from './features/signup/signup.component';
+import { SigninComponent } from './features/signin/signin.component';
+// import { SignupComponent } from './features/signup/signup.component';
 
 export const routes: Routes = [
-    {  path: '', component: HomePage, children:[
-        {path: 'id-card', component: IdCard},
-        {path: 'dashboard', component: DashboardPage},
-        {path: 'employees', component: EmployeePage},
-        {path: 'departements', component: DepartementPage},
-        {path: 'banques', component: BanquePage},
-        {path: 'etat-civils', component: EtatCivilPage},
-        {path: 'type-conges', component: TypeCongePage},
-        {path: 'positions', component: PositionPage},
-    ]}
-];
+  {
+    path: '',
+    component: MainLayoutComponent,
+    children: [
+    //   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    //   // Nous créerons ces composants ensuite
+      { path: 'dashboard', loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent) },
+      { path: 'menu',  loadComponent: () => import('./features/menu/menu-management.component').then(m => m.MenuManagementComponent)},
+      { path: 'orders',  loadComponent: () => import('./features/order/order-manager.component').then(m => m.OrderManagerComponent)},
+      { path: 'tables',  loadComponent: () => import('./features/tables/table-management.component').then(m => m.TableManagementComponent)},
+      { path: 'settings',  loadComponent: () => import('./features/settings/settings.component').then(m => m.SettingsComponent)},
+      { path: 'images-manager',  loadComponent: () => import('./features/image-manager/image-manager.component').then(m => m.ImageManagerComponent)},
+    ]
+  },
+  { path: 'signup', component: SignupComponent},
+  { path: 'signin', component: SigninComponent}
+
+  // { path: 'signup', loadComponent: () => import('./features/signup/signup.component').then(m => m.SignupComponent) }
+]

@@ -1,0 +1,117 @@
+<p-dialog [(visible)]="displayCreateDialog" class="win11-dialog" [header]="'Nouvel Article'" [modal]="false" [breakpoints]="{'960px': '75vw'}" [style]="{width: '800px'}" [draggable]="false" [resizable]="false">
+        <form [formGroup]="createForm" (ngSubmit)="onSubmitCreateForm()" class="flex flex-col gap-4 ">
+           <div class="relative grid grid-cols-2 px-2 max-h-60 overflow-y-auto gap-3">
+              <div class="flex flex-col gap-3 sticky top-0">
+                <div class="flex flex-col gap-2">
+                  <label class="text-sm font-semibold">Nom de l'article</label>
+                  <input pInputText required formControlName="name" [invalid]="isCreateFormInvalid('name')" placeholder="ex: Pizza Margherita" />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm font-semibold">Description</label>
+                    <input pInputText formControlName="description"  placeholder="ex: ingredients..." />
+                </div>            
+                <div class="flex items-center gap-2">
+                    <p-checkbox formControlName="available" [binary]="true" inputId="available"  [invalid]="isCreateFormInvalid('available')" />
+                    <label for="available"> {{ 'Available' | titlecase }} </label>
+                </div>
+                <div class="flex items-center gap-2">
+                  
+                    <image-picker (imageSelected)="onCreateImageSelected($event)" />
+                  
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2.5" formArrayName="variations">
+                <div class="flex justify-between items-center">
+                  <h2>Variations</h2>
+                  <button>
+                    <i class="pi pi-plus"></i>
+                  </button>
+                  <!-- <p-button (click)="addVariationC()">Add Variation</p-button> -->
+                </div>
+                @for(variation of variationsC.controls; track $index ){
+                  <div  class="flex flex-col gap-2 border border-gray-300 bg-amber-50  pb-2">
+                    <div class="w-full flex justify-between bg-amber-200 border-b border-gray-300">
+                      <span class="ml-2 mt-2">Variation #{{$index+1}}</span>
+                      <button (click)="removeVariationC($index)" class="hover:bg-red-500 px-5 py-1 border-b border-amber-200 hover:border-red-500 text-white">
+                        <i class="pi pi-plus rotate-45"></i>
+                      </button>
+                    </div>
+                    <div class="px-2 flex flex-col gap-2" [formGroupName]="$index">
+
+                      <input pInputText required formControlName="name"  placeholder="Name" />
+                      <p-inputNumber required formControlName="price" placeholder="Price"></p-inputNumber>
+                    </div>
+                    <!-- <p-button  class="ml-auto mr-2 mb-2">Remove</p-button> -->
+                    
+                  </div>
+                }
+              </div>
+           </div>
+           
+            <div class="flex justify-end gap-2 mt-1">
+                <button pButton label="Annuler" class="p-button-text text-gray-500" (click)="displayCreateDialog = false"></button>
+                <button pButton label="Enregistrer" type="submit" [disabled]="createForm.invalid" class="shadow-fluent"></button>
+            </div>
+        </form>
+</p-dialog>
+
+<p-dialog [(visible)]="displayUpdateDialog" class="win11-dialog" header="Modifier Cet Article" [modal]="false" [breakpoints]="{'960px': '75vw'}" [style]="{width: '800px'}" [draggable]="false" [resizable]="false">
+        <form [formGroup]="updateForm" (ngSubmit)="onSubmitUpdateForm()" class="flex flex-col gap-4 ">
+           <div class="relative grid grid-cols-2 px-2 max-h-60 overflow-y-auto gap-3">
+              <div class="flex flex-col gap-3 sticky top-0">
+
+                <div class="flex flex-col gap-2">
+                  <label class="text-sm font-semibold">Nom de l'article</label>
+                  <input pInputText required formControlName="name" [invalid]="isUpdateFormInvalid('name')" placeholder="ex: Pizza Margherita" />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm font-semibold">Description</label>
+                    <input pInputText formControlName="description"  placeholder="ex: ingredients..." />
+                </div>
+                <div class="flex items-center gap-2">
+                    <p-checkbox formControlName="available" [binary]="true" inputId="available"  [invalid]="isUpdateFormInvalid('available')" />
+                    <label for="available"> {{ 'Available' | titlecase }} </label>
+                </div>
+                <div class="flex items-center gap-2">
+                  
+                  <image-picker (imageSelected)="onUpdateImageSelected($event)" [currentImage]="currentMenuItem.coverUrl"/>
+                    
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2.5" formArrayName="variations">
+                <div class="flex justify-between items-center">
+                  <h2>Variations</h2>
+                  <button>
+                    <i class="pi pi-plus"></i>
+                  </button>
+                  <!-- <p-button (click)="addVariationU()">Add Variation</p-button> -->
+                </div>
+                @for(variation of variationsU.controls; track $index ){
+                  <div  class="flex flex-col gap-2 border border-gray-300 bg-amber-50  pb-2">
+                    <div class="w-full flex justify-between bg-amber-200 border-b border-gray-300">
+                      <span class="ml-2 mt-2">Variation #{{$index+1}}</span>
+                      <button (click)="removeVariationU($index)" class="hover:bg-red-500 px-5 py-2 border-b border-amber-200 hover:border-red-500 text-white">
+                        <i class="pi pi-plus rotate-45"></i>
+                      </button>
+                    </div>
+                    <div class="px-2 flex flex-col gap-2" [formGroupName]="$index">
+
+                      <input pInputText required formControlName="name"  placeholder="Name" />
+                      <p-inputNumber required formControlName="price" placeholder="Price"></p-inputNumber>
+                    </div>
+                    <!-- <p-button  class="ml-auto mr-2 mb-2">Remove</p-button> -->
+                    
+                  </div>
+                }
+              </div>
+              
+
+           </div>
+            <div class="flex justify-end gap-2 mt-1">
+                <button pButton label="Annuler" class="p-button-text text-gray-500" (click)="displayUpdateDialog = false"></button>
+                <button pButton label="Enregistrer" type="submit" [disabled]="updateForm.invalid" class="shadow-fluent"></button>
+            </div>
+        </form>
+</p-dialog>

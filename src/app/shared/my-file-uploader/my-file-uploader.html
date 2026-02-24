@@ -1,0 +1,24 @@
+<div class="upload-container">
+    <input
+        type="file"
+        id="photoInput"
+        accept="image/*"
+        (change)="onFileChange($event)"
+        hidden
+    />
+    <label for="photoInput" class="upload-box">
+        <span class="icon">📷</span>
+        <span class="text">Ajouter la photo</span>
+        <!-- <small class="text-gray-500 text-center">Dimension requise: 300x300</small> -->
+    </label>
+                            
+    @if(isPhotoReady$()){
+        <!-- {{photoPreview}} -->
+        <img [src]="photoPreview$()"  class="preview" />
+    }@else {
+        <div class="preview-skeleton">
+
+            <p-skeleton width="190px" height="190px" borderRadius="16px"/>
+        </div>
+    }
+</div>

@@ -1,0 +1,102 @@
+<!-- Create Category -->
+<p-dialog [(visible)]="displayCreateDialog" 
+          header="Nouvelle catégorie" 
+          [modal]="false" 
+          [draggable]="false" 
+          [resizable]="false"
+          [style]="{width: '350px'}"
+          class="win11-dialog z-21 absolute">
+    
+          <form [formGroup]="createForm" (ngSubmit)="onSubmitCreateForm()" class="flex flex-col gap-4">
+            <div class="flex flex-col px-2 max-h-60 overflow-y-auto gap-3">
+
+              <div class="flex flex-col gap-2">
+                  <label class="text-xs font-bold text-win-text-sec uppercase tracking-wider">Nom de la catégorie</label>
+                  <input pInputText 
+                         formControlName="name"
+                         required
+                         [invalid]="isCreateFormInvalid('name')"
+                         placeholder="ex: Pizzas, Boissons..." 
+                         class="w-full"
+                          />
+              </div>
+              <div class="flex flex-col gap-2">
+                  <label class="text-xs font-bold text-win-text-sec uppercase tracking-wider">Description de la catégorie</label>
+                  <input pInputText 
+                         formControlName="description"
+                         placeholder="ex: Pizzas, Boissons..." 
+                         class="w-full"
+                          />
+              </div>
+              <!-- <div class="flex items-center gap-2">
+               
+                  <image-picker (imageSelected)="onCreateImageSelected($event)" />
+                
+              </div> -->
+            </div>
+    
+            <div class="flex justify-end gap-2">
+                <button pButton label="Annuler"
+                        type="button" 
+                        (click)="displayCreateDialog = false"
+                        class="p-button-text p-button-secondary text-sm"></button>
+                <button pButton label="Créer" 
+                        type="submit"
+                        [disabled]="createForm.invalid"
+                        class="p-button-primary shadow-fluent text-sm px-6"></button>
+            </div>
+          </form>
+    
+</p-dialog>
+
+
+<!-- Update Category -->
+<p-dialog [(visible)]="displayUpdateDialog" 
+          header="Modifier cette catégorie" 
+          [modal]="false" 
+          [draggable]="false" 
+          [resizable]="false"
+          [style]="{width: '350px'}"
+          class="win11-dialog z-21 absolute">
+    
+          <form [formGroup]="updateForm" (ngSubmit)="onSubmitUpdateForm()" class="flex flex-col gap-4">
+            <div class="flex flex-col px-2 max-h-60 overflow-y-auto gap-3">
+
+              <div class="flex flex-col gap-2">
+                  <label class="text-xs font-bold text-win-text-sec uppercase tracking-wider">Nom de la catégorie</label>
+                  <input pInputText 
+                         formControlName="name"
+                         required
+                         [invalid]="isUpdateFormInvalid('name')"
+                         placeholder="ex: Pizzas, Boissons..." 
+                         class="w-full"
+                          />
+              </div>
+              <div class="flex flex-col gap-2">
+                  <label class="text-xs font-bold text-win-text-sec uppercase tracking-wider">Description de la catégorie</label>
+                  <input pInputText 
+                         formControlName="description"
+                         placeholder="ex: Pizzas, Boissons..." 
+                         class="w-full"
+                          />
+              </div>
+              <!-- <div class="flex items-center gap-2">
+               
+                  <image-picker (imageSelected)="onUpdateImageSelected($event)" [currentImage]="currentCategory.coverUrl"/>
+                
+              </div> -->
+            </div>
+    
+            <div class="flex justify-end gap-2">
+                <button pButton label="Annuler"
+                        type="button" 
+                        (click)="displayUpdateDialog = false"
+                        class="p-button-text p-button-secondary text-sm"></button>
+                <button pButton label="Créer" 
+                        type="submit"
+                        [disabled]="updateForm.invalid"
+                        class="p-button-primary shadow-fluent text-sm px-6"></button>
+            </div>
+          </form>
+    
+</p-dialog>

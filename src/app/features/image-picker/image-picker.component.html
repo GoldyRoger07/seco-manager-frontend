@@ -1,0 +1,53 @@
+<!-- <p-button
+  label="Select image"
+  icon="pi pi-image"
+  (onClick)="open()">
+</p-button> -->
+
+<!-- <div class="upload-container">
+
+    <button (click)="open()" class="upload-box">
+            <span class="icon">
+                <i class="pi pi-image"></i>
+            </span>
+            <span class="text text-center p-1">Selectionner une image</span>
+            
+    </button>
+    @if(isPhotoReady$()){
+           
+            <img [src]="photoPreview$()"  class="preview" />
+    }@else {
+            <div class="preview-skeleton">
+
+                <p-skeleton width="190px" height="190px" borderRadius="16px"/>
+            </div>
+    }
+</div> -->
+
+<!-- <p-dialog
+  header="Select an image"
+  [(visible)]="visible"
+  [modal]="false"
+  [style]="{ width: '60vw' }"
+  [draggable]="false"
+  [resizable]="false"> -->
+
+  <!-- <div class="bg-red w-full h-10">
+
+  </div> -->
+  <h4>Selectionner une image</h4>
+  <div class="image-grid">
+    @for(img of images; track $index){
+        <div
+          class="image-item"
+          [class.selected]="selectedImage === img"
+          (click)="selectImage(img)"
+        >
+    
+          <img [src]="imageUrl(img)" />
+        </div>
+    }
+  </div>
+
+
+<!-- </p-dialog> -->

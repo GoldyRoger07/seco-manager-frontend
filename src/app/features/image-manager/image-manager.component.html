@@ -1,0 +1,15 @@
+<input type="file" multiple (change)="onFilesSelected($event)" />
+
+<button (click)="upload()">Uploader</button>
+
+<div class="grid">
+    @for (img of images(); track $index) {
+
+        <div class="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow relative group" >
+          <img [src]="imageUrl(img)" />
+          <button class="p-2 absolute top-0 right-0 flex gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 rounded-lg" (click)="remove(img)">
+            <i class="pi pi-trash text-red-500"></i>
+          </button>
+        </div>
+    }
+</div>
